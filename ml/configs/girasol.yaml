@@ -1,0 +1,41 @@
+# Parámetros de captura y features de Girasol.
+# Fuente: docs/00-brief.md §3 y docs/02-matematicas.md.
+# Ningún número mágico en el código: todo sale de aquí.
+
+raster:
+  n_scans: 100        # N — barridos por vuelta (§3)
+  m_channels: 12      # M — canales radiales (§3)
+  # Radios por canal, de radio menor (canal 0) a radio mayor (canal 11) (§3).
+  radii_mm: [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140]
+  # Brazo A: canales pares; brazo B: impares. Desfase N/2 = 50 barridos (§5.2).
+  arm_offset_scans: 50
+
+motion:
+  microsteps_per_rev: 1600   # S (§3)
+  microsteps_per_scan: 16    # s (§3)
+  pulse_period_ms: 2         # Tp (§3)
+  revolution_time_s: 3.2     # Trev (§3)
+  angular_resolution_deg: 3.6
+
+features:
+  n_features: 10
+  delta_r_mm: 10.0           # paso radial entre canales contiguos (§3)
+
+normalization:
+  epsilon: 1.0e-8            # docs/02-matematicas.md §5.8
+
+classifier:
+  # Número de clases K: PENDIENTE.
+  # El brief §5.11 tabula K=4; la Fase 2 (§11) menciona 4 clases más una variante
+  # volteada. No fijar hasta que exista el ADR de clases.
+  k_classes: PENDIENTE
+  # Modelo activo: 0 = árbol, 1 = logística, 2 = MLP.
+  model_kind: PENDIENTE
+
+parity:
+  relative_tolerance: 1.0e-4  # docs/00-brief.md §8.6
+
+conformal:
+  # Nivel de error objetivo y tamaño mínimo del set de calibración: PENDIENTE.
+  alpha: PENDIENTE
+  min_calibration_samples: PENDIENTE

@@ -1,0 +1,77 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "girasol"
+version = "0.0.0"
+description = "Clasificador de piezas con IA en PLC: referencia Python de features, modelos y exportación."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "scikit-learn>=1.5",
+]
+
+[project.scripts]
+girasol = "girasol.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/girasol"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "W",   # pycodestyle warnings
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+    "RET", # flake8-return
+    "RUF", # ruff-specific
+    "D",   # pydocstyle
+]
+ignore = [
+    "D203", # conflicto con D211
+    "D213", # conflicto con D212
+    "D401", # los docstrings van en español, no en imperativo inglés
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]
+show_error_codes = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=girasol --cov-report=term-missing"
+
+[tool.coverage.run]
+branch = true
+source = ["girasol"]
+
+[tool.coverage.report]
+# El umbral exigido por el brief (§7) es 85 % sobre features.py.
+# CI lo aplica con: pytest --cov=girasol.features --cov-fail-under=85
+fail_under = 85
