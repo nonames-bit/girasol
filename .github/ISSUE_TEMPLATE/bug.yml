@@ -1,0 +1,65 @@
+name: Bug
+description: Reportar un defecto en código, documentación o hardware
+title: "[bug] "
+labels: ["type:bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Antes de abrir: revisa si el fallo es de paridad ST↔Python (usa la plantilla de
+        experimento si el resultado es incierto).
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      description: Etiqueta de área afectada (ver docs/00-brief.md §8.4).
+      options:
+        - "area:plc"
+        - "area:ml"
+        - "area:hw"
+        - "area:docs"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Qué ocurre
+      description: Comportamiento observado, con el mensaje de error literal si lo hay.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Qué se esperaba
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Pasos para reproducir
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: input
+    id: commit
+    attributes:
+      label: Commit o versión
+      placeholder: "v0.1.0 / abc1234"
+    validations:
+      required: false
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidencia
+      description: Logs, capturas, mediciones. Si es hardware, foto del montaje.
+    validations:
+      required: false

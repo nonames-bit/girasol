@@ -1,0 +1,46 @@
+name: Docs
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "README.md"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  docs:
+    name: Documentation build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check that every documented file exists
+        run: |
+          set -eu
+          missing=0
+          for f in \
+            docs/00-brief.md \
+            docs/01-arquitectura.md \
+            docs/02-matematicas.md \
+            docs/03-contrato-datos.md \
+            docs/04-manual-montaje.md \
+            docs/05-manual-operacion.md \
+            docs/06-manual-entrenamiento.md \
+            docs/07-explicacion-sencilla.md \
+            docs/adr/template.md
+          do
+            if [ ! -f "$f" ]; then
+              echo "::error::Missing documentation file: $f"
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      # TODO: elegir generador de documentación (MkDocs o Sphinx) y habilitar el build.
+      # Ver docs/adr/ — la elección del generador requiere su propio ADR.
+      - name: Build documentation
+        run: echo "Documentation generator not selected yet (PENDIENTE)."

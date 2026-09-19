@@ -1,0 +1,50 @@
+name: Experimento
+description: Registrar un experimento con resultado incierto (tipo de commit `exp`)
+title: "[experimento] "
+labels: ["type:experiment"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Un experimento fallido bien documentado vale más que tres éxitos sin método
+        (docs/00-brief.md §10.4). El archivo final vive en
+        `docs/experimentos/AAAA-MM-DD-slug.md`.
+
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hipótesis
+      description: Qué esperas que ocurra y por qué.
+    validations:
+      required: true
+
+  - type: textarea
+    id: setup
+    attributes:
+      label: Configuración
+      description: Dataset, parámetros, semilla, modelo. Sé exacto.
+    validations:
+      required: true
+
+  - type: textarea
+    id: metric
+    attributes:
+      label: Métrica y criterio de decisión
+      description: Qué número decide si la hipótesis se acepta o se rechaza.
+    validations:
+      required: true
+
+  - type: textarea
+    id: result
+    attributes:
+      label: Resultado
+      description: Déjalo vacío hasta que el experimento termine.
+    validations:
+      required: false
+
+  - type: textarea
+    id: conclusion
+    attributes:
+      label: Conclusión
+    validations:
+      required: false

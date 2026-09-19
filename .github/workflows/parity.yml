@@ -1,0 +1,47 @@
+name: Parity (ST vs Python)
+
+on:
+  pull_request:
+    paths:
+      - "plc/**"
+      - "ml/src/girasol/features.py"
+      - "ml/tests/golden/**"
+      - ".github/workflows/parity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    name: Golden vectors within 1e-4
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ml
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install
+        run: pip install -e ".[dev]"
+
+      - name: Skip when golden vectors do not exist yet
+        id: golden
+        run: |
+          if ls tests/golden/*.json >/dev/null 2>&1 || ls tests/golden/st/*.json >/dev/null 2>&1; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No golden vectors yet — skipping parity. See ml/tests/golden/README.md."
+          fi
+
+      - name: Run parity tests
+        if: steps.golden.outputs.ready == 'true'
+        run: pytest tests/test_parity.py -v

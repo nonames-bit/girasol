@@ -1,0 +1,64 @@
+name: Feature
+description: Proponer funcionalidad o cambio de diseño
+title: "[feature] "
+labels: []
+body:
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Fase
+      description: Etapa del roadmap (ver docs/00-brief.md §11).
+      options:
+        - "fase-1"
+        - "fase-2"
+        - "fase-3"
+        - "fase-4"
+        - "fase-5"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options:
+        - "area:plc"
+        - "area:ml"
+        - "area:hw"
+        - "area:docs"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema o necesidad
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Propuesta
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Criterio de aceptación
+      description: >
+        Regla del proyecto: si no puedes escribir el test antes, la tarea no está lista
+        para delegar (docs/00-brief.md §9.1).
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: design
+    attributes:
+      label: Diseño
+      options:
+        - label: Esta propuesta requiere un ADR (decisión de arquitectura no obvia)
+          required: false
+        - label: Toca un cálculo de la sección 5 → requiere test de paridad ST/Python
+          required: false
