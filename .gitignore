@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+.coverage.*
+
+# Datos: nunca entran al repositorio (brief §6, §8.7)
+data/raw/
+data/processed/
+*.parquet
+*.csv.gz
+
+# Pesos y checkpoints
+models/*.onnx
+models/checkpoints/
+
+# Entornos y editores
+.vscode/
+.idea/
+.DS_Store
+
+# Respaldos
+*.bak
+Backup*/
+
+# Salidas de herramientas de planta (binarios de proyecto, ver .gitattributes)
+*.smc2.bak
+
+# CAD de proveedor: se conserva en local, no se redistribuye.
+# Los modelos son descargas de terceros con sus propias condiciones de uso.
+# Ver hardware/cad/README.md. Quitar esta línea para versionarlos igualmente.
+hardware/cad/vendor/

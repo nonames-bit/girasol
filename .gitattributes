@@ -1,0 +1,20 @@
+# Normalización de finales de línea
+* text=auto eol=lf
+
+# Git LFS — binarios pesados que no se diferencian (brief §8.1)
+*.stl  filter=lfs diff=lfs merge=lfs -text
+*.step filter=lfs diff=lfs merge=lfs -text
+*.stp  filter=lfs diff=lfs merge=lfs -text
+*.edz  filter=lfs diff=lfs merge=lfs -text
+*.smc2 filter=lfs diff=lfs merge=lfs -text
+*.ACD  filter=lfs diff=lfs merge=lfs -text
+*.png  filter=lfs diff=lfs merge=lfs -text
+*.mp4  filter=lfs diff=lfs merge=lfs -text
+
+# Exportaciones de PLC versionables como texto plano
+*.st   text eol=lf
+*.l5x  text eol=lf
+
+# Archivos binarios: nunca normalizar
+*.xlsx binary
+*.pdf  binary
