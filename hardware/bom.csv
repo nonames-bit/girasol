@@ -1,0 +1,17 @@
+item,spec,cantidad,notas
+Sensor fotoeléctrico difuso con BGS,"Balluff, PNP NO/NC, M8 4 pines, 10-30 VDC (brief §3: BOS ...-PU-RH10-S75)",17,"12 en uso, 1 de home, 4 de reserva. El modelo del brief no coincide con los CAD en CAD/ (BALLUFF BOS 18MR-PA-LD10-S4). CONFIRMAR modelo real."
+Canales radiales en uso,-,12,"6 por brazo; ver radios en docs/00-brief.md §3"
+Índice de home,-,1,"1 sensor al canto del plato"
+PLC principal,Omron NX102-9000,1,
+Entradas digitales,NX-ID5442 (32 puntos),2,
+Salidas digitales,NX-OD5256,1,"Número de puntos no consta en el brief: PENDIENTE"
+PLC secundario,Allen-Bradley CompactLogix L33ER,1,"Portabilidad (Fase 5)"
+Motor,NEMA 17,1,
+Driver de motor,"TB6600, entradas 24 V, cátodo común",1,
+Fuente de alimentación,"24 VDC, 3 A mínimo",1,
+Cordsets,M8 hembra 4 pines,13,
+Viga diametral,-,1,"Geometría en docs/00-brief.md §3; diseño CAD PENDIENTE"
+Postes del pórtico,-,2,"Estructura de pórtico, no voladizo: PENDIENTE dimensionar"
+Plato giratorio,-,1,"Brief §11 pide 310 mm en segmentos imprimibles; CAD PENDIENTE"
+Portasensor,-,13,"Diseño PENDIENTE (Fase 1)"
+Gálibo de montaje,-,1,"Diseño PENDIENTE (Fase 1)"
