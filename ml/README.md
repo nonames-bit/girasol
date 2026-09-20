@@ -32,6 +32,7 @@ pytest --cov=girasol.features --cov-fail-under=85
 
 | Ruta | Qué es |
 | --- | --- |
+| `src/girasol/config.py` | Carga de `configs/girasol.yaml`; fuente única de constantes (añadido, ver abajo) |
 | `src/girasol/raster.py` | Carga y fusión de brazos (§5.1, §5.2) |
 | `src/girasol/features.py` | Momentos, invariantes y vector de 10 features (§5.3–5.7) |
 | `src/girasol/models/` | Árbol, regresión logística y MLP (§5.9) |
@@ -42,6 +43,14 @@ pytest --cov=girasol.features --cov-fail-under=85
 | `tests/golden/` | Vectores dorados para paridad ST↔Python |
 | `configs/girasol.yaml` | Parámetros geométricos y de captura |
 | `notebooks/` | Exploración. Nada de producción importa desde aquí |
+
+### Desviación del brief
+
+`src/girasol/config.py` no aparece en la estructura de la sección 6 del brief. Se añadió
+para cumplir su propia regla de §7 ("sin números mágicos: todo parámetro geométrico o de
+captura vive en `configs/`"): sin un cargador, los valores del YAML y las constantes del
+código quedaban duplicados y podían divergir en silencio. Es la única forma de que el
+YAML sea de verdad la fuente única.
 
 ## Reglas
 

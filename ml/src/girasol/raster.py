@@ -8,11 +8,16 @@ from __future__ import annotations
 import numpy as np
 from numpy.typing import NDArray
 
-# Radios por canal, de radio menor (0) a radio mayor (M-1). Ver docs/00-brief.md §3.
-CHANNEL_RADII_MM: tuple[float, ...] = (30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140)
+from girasol.config import load_config
 
-N_SCANS: int = 100
-M_CHANNELS: int = 12
+_CONFIG = load_config()
+
+# Radios por canal, de radio menor (0) a radio mayor (M-1).
+# Fuente única: ml/configs/girasol.yaml. Ver docs/00-brief.md §3.
+CHANNEL_RADII_MM: tuple[float, ...] = _CONFIG.radii_mm
+
+N_SCANS: int = _CONFIG.n_scans
+M_CHANNELS: int = _CONFIG.m_channels
 
 Raster = NDArray[np.bool_]
 

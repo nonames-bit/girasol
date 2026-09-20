@@ -61,6 +61,15 @@ $$\mu_{20} = \sum_{k,j} B\, r_j (x_{kj}-\bar{x})^2, \quad
 \mu_{02} = \sum_{k,j} B\, r_j (y_{kj}-\bar{y})^2, \quad
 \mu_{11} = \sum_{k,j} B\, r_j (x_{kj}-\bar{x})(y_{kj}-\bar{y})$$
 
+Momentos centrales de tercer orden (necesarios para $\varphi_7$ de §5.6; **no** estaban
+en el brief original y se añaden aquí como parte de esta referencia normativa):
+
+$$\mu_{30} = \sum_{k,j} B\, r_j (x_{kj}-\bar{x})^3, \qquad
+\mu_{03} = \sum_{k,j} B\, r_j (y_{kj}-\bar{y})^3$$
+
+$$\mu_{21} = \sum_{k,j} B\, r_j (x_{kj}-\bar{x})^2 (y_{kj}-\bar{y}), \qquad
+\mu_{12} = \sum_{k,j} B\, r_j (x_{kj}-\bar{x})(y_{kj}-\bar{y})^2$$
+
 Área física aproximada:
 
 $$A \approx M_{00} \cdot \Delta r \cdot \Delta\theta$$
@@ -93,9 +102,22 @@ $$\varphi_1 = \eta_{20} + \eta_{02}$$
 
 $$\varphi_2 = (\eta_{20}-\eta_{02})^2 + 4\eta_{11}^2$$
 
+$\varphi_7$, el invariante de tercer orden (normalizado con la misma $\eta_{pq}$ de
+arriba, con $p+q=3$). **Fórmula estándar de Hu, añadida aquí**: el brief original la
+exige en el vector de features (§5.7, componente 3) pero no la escribía, lo que hacía el
+feature inimplementable.
+
+$$\begin{aligned}
+\varphi_7 ={} & (3\eta_{21} - \eta_{03})(\eta_{30} + \eta_{12})
+\left[(\eta_{30}+\eta_{12})^2 - 3(\eta_{21}+\eta_{03})^2\right] \\
+& + (3\eta_{12} - \eta_{30})(\eta_{21} + \eta_{03})
+\left[3(\eta_{30}+\eta_{12})^2 - (\eta_{21}+\eta_{03})^2\right]
+\end{aligned}$$
+
 **Excepción deliberada:** para detectar una pieza volteada se necesita un feature que
 NO sea invariante a reflexión. $\varphi_7$ de Hu cambia de signo bajo reflexión y es
-exactamente eso. Documentarlo como decisión de diseño.
+exactamente eso. El signo debe conservarse: no usar $\lvert\varphi_7\rvert$. Documentarlo
+como decisión de diseño.
 
 ## 5.7 Vector de features
 

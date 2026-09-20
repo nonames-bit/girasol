@@ -13,14 +13,17 @@ from __future__ import annotations
 import numpy as np
 from numpy.typing import NDArray
 
+from girasol.config import load_config
 from girasol.raster import CHANNEL_RADII_MM, M_CHANNELS, N_SCANS, Raster
+
+_CONFIG = load_config()
 
 FeatureVector = NDArray[np.float64]
 
-N_FEATURES: int = 10
+N_FEATURES: int = _CONFIG.n_features
 
-# Delta radial entre canales contiguos, en mm (docs/00-brief.md §3).
-DELTA_R_MM: float = 10.0
+# Delta radial entre canales contiguos, en mm. Fuente única: ml/configs/girasol.yaml.
+DELTA_R_MM: float = _CONFIG.delta_r_mm
 
 
 def _polar_coordinates() -> tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]:
@@ -80,8 +83,35 @@ def central_moments(raster: Raster) -> tuple[float, float, float]:
     raise NotImplementedError("Fase 2: implementar (§5.4).")
 
 
+def central_moments_order3(raster: Raster) -> tuple[float, float, float, float]:
+    """Calcular los momentos centrales de tercer orden.
+
+    Parameters
+    ----------
+    raster : Raster
+        Raster fusionado.
+
+    Returns
+    -------
+    tuple of float
+        ``(mu30, mu03, mu21, mu12)``.
+
+    Notes
+    -----
+    Ver ``docs/02-matematicas.md`` §5.4. Son necesarios para ``phi7`` (§5.6).
+    """
+    raise NotImplementedError("Fase 2: implementar (§5.4).")
+
+
 def hu_invariants(
-    mu20: float, mu02: float, mu11: float, m00: float
+    mu20: float,
+    mu02: float,
+    mu11: float,
+    mu30: float,
+    mu03: float,
+    mu21: float,
+    mu12: float,
+    m00: float,
 ) -> tuple[float, float, float]:
     """Calcular ``phi1``, ``phi2`` y ``phi7`` con signo.
 
@@ -89,6 +119,8 @@ def hu_invariants(
     ----------
     mu20, mu02, mu11 : float
         Momentos centrales de segundo orden.
+    mu30, mu03, mu21, mu12 : float
+        Momentos centrales de tercer orden, requeridos por ``phi7``.
     m00 : float
         Momento de orden cero, usado para normalizar.
 
@@ -157,6 +189,7 @@ __all__ = [
     "N_FEATURES",
     "N_SCANS",
     "central_moments",
+    "central_moments_order3",
     "compute_features",
     "elongation",
     "hu_invariants",

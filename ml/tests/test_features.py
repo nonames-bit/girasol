@@ -1,6 +1,6 @@
 """Pruebas de los descriptores geométricos.
 
-Implementación de referencia: ``docs/02-matematicas.md`` §5.3–5.7.
+Implementación de referencia: ``docs/02-matematicas.md`` §5.3-5.7.
 Las pruebas numéricas se activan en la Fase 2, cuando existan los vectores dorados.
 """
 

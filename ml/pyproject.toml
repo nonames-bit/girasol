@@ -11,6 +11,7 @@ requires-python = ">=3.11"
 license = { text = "MIT" }
 dependencies = [
     "numpy>=1.26",
+    "pyyaml>=6.0",
 ]
 
 [project.optional-dependencies]
@@ -20,6 +21,7 @@ dev = [
     "pytest>=8.3",
     "pytest-cov>=6.0",
     "scikit-learn>=1.5",
+    "types-PyYAML>=6.0",
 ]
 
 [project.scripts]
@@ -65,7 +67,9 @@ show_error_codes = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=girasol --cov-report=term-missing"
+# Sin opciones de cobertura por defecto: el objetivo lo fija quien invoca pytest,
+# para que cada job mida exactamente lo que declara.
+# Job de features: pytest --cov=girasol.features --cov-fail-under=85
 
 [tool.coverage.run]
 branch = true
@@ -73,5 +77,5 @@ source = ["girasol"]
 
 [tool.coverage.report]
 # El umbral exigido por el brief (§7) es 85 % sobre features.py.
-# CI lo aplica con: pytest --cov=girasol.features --cov-fail-under=85
+# Solo se aplica cuando la cobertura está habilitada (--cov).
 fail_under = 85

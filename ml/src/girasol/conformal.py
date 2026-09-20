@@ -11,7 +11,9 @@ import numpy as np
 from numpy.typing import NDArray
 
 
-def nonconformity(probabilities: NDArray[np.float64], labels: NDArray[np.int_]) -> NDArray[np.float64]:
+def nonconformity(
+    probabilities: NDArray[np.float64], labels: NDArray[np.int_]
+) -> NDArray[np.float64]:
     """Calcular los scores de no-conformidad ``s_i = 1 - p_{y_i}``.
 
     Parameters
