@@ -74,7 +74,7 @@ Antes de abrir un PR:
 
 ```bash
 cd ml
-ruff format . && ruff check . && mypy --strict src/ && pytest --cov --cov-fail-under=85
+ruff format . && ruff check . && mypy --strict src/ && pytest --cov=girasol.features --cov-fail-under=85
 ```
 
 ## Definition of Done

@@ -54,7 +54,7 @@ Vector de 10 features, en el orden de `docs/02-matematicas.md` §5.7.
 | 4 | Elongación | adimensional |
 | 5 | $\rho_{\max}-\rho_{\min}$ | mm |
 | 6 | Transiciones medias por fila | adimensional |
-| 7 | Compacidad $P^2/A$ | 1/mm² |
+| 7 | Compacidad $P^2/A$ | adimensional |
 | 8 | Fracción de filas ocupadas | adimensional |
 | 9 | $\lambda_1/\lambda_2$ | adimensional |
 
@@ -106,7 +106,7 @@ Debe ser idéntico en ambas plataformas (ver `plc/shared/contratos.md`).
 | `rW2` | `ARRAY[0..K-1,0..11] OF REAL` | Pesos de salida |
 | `rB2` | `ARRAY[0..K-1] OF REAL` | Sesgos de salida |
 | `rQhat` | `REAL` | Umbral conformal $\hat{q}$ (§5.10) |
-| `rAlpha` | `REAL` | Nivel de confianza objetivo (`PENDIENTE`) |
+| `rAlpha` | `REAL` | Nivel de error objetivo $\alpha$ (1 − confianza) (`PENDIENTE`) |
 | `aTreeNodes` | `ARRAY[0..31] OF REAL` | Árbol aplanado, profundidad ≤ 5 |
 
 **`PENDIENTE`:** la representación exacta del árbol aplanado (índices de hijo, umbral,

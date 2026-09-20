@@ -32,16 +32,21 @@ jobs:
       - name: Install
         run: pip install -e ".[dev]"
 
+      # La condición debe ser la MISMA que el skip de ml/tests/test_parity.py:19
+      # (Python y ST, ambos), o el job daría verde sin comparar nada.
       - name: Skip when golden vectors do not exist yet
         id: golden
         run: |
-          if ls tests/golden/*.json >/dev/null 2>&1 || ls tests/golden/st/*.json >/dev/null 2>&1; then
+          if ls tests/golden/*.json >/dev/null 2>&1 && ls tests/golden/st/*.json >/dev/null 2>&1; then
             echo "ready=true" >> "$GITHUB_OUTPUT"
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::No golden vectors yet — skipping parity. See ml/tests/golden/README.md."
+            echo "::notice::Golden vectors (Python y ST) incompletos — se omite la paridad. Ver ml/tests/golden/README.md."
           fi
 
+      # -p no:cov: este job verifica paridad, no cobertura. La cobertura es opt-in
+      # (no está en addopts), pero se desactiva explícitamente para que nunca
+      # herede [tool.coverage.report].fail_under y falle por cobertura.
       - name: Run parity tests
         if: steps.golden.outputs.ready == 'true'
-        run: pytest tests/test_parity.py -v
+        run: pytest tests/test_parity.py -v -p no:cov

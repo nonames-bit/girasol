@@ -39,8 +39,9 @@ jobs:
       - name: mypy --strict
         run: mypy --strict src/
 
-      - name: pytest with coverage
-        run: pytest --cov --cov-fail-under=85
+      # Objetivo exacto del brief §7: 85 % sobre features.py.
+      - name: pytest with coverage on features.py
+        run: pytest --cov=girasol.features --cov-fail-under=85
 
   changelog:
     name: CHANGELOG updated with src changes

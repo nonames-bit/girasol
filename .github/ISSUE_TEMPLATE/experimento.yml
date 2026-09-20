@@ -1,7 +1,7 @@
 name: Experimento
 description: Registrar un experimento con resultado incierto (tipo de commit `exp`)
 title: "[experimento] "
-labels: ["type:experiment"]
+labels: ["tipo:experimento"]
 body:
   - type: markdown
     attributes:

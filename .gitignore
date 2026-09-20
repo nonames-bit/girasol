@@ -20,6 +20,15 @@ data/processed/
 models/*.onnx
 models/checkpoints/
 
+# Secretos y credenciales: nunca al repositorio (es público)
+.env
+.env.*
+*.pem
+*.key
+*.p12
+credentials*
+secrets/
+
 # Entornos y editores
 .vscode/
 .idea/
