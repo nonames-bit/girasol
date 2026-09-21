@@ -17,6 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   geometric constants have a single source instead of being duplicated in code.
 - Third-order central moments and the explicit Hu `phi7` formula in
   `docs/02-matematicas.md` §5.4 and §5.6; feature 3 was previously inimplementable.
+- Own CAD models under `hardware/cad/` (table, supports and Balluff sensor holder),
+  versioned through git-lfs, with measured bounding boxes documented in the folder
+  README.
+- `hardware/cad/view_cad.py`: local viewer that loads STEP and STL through the OCP
+  kernel and renders them in the VS Code OCP CAD Viewer panel.
 
 ### Fixed
 
