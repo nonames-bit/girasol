@@ -52,6 +52,17 @@ El modelo aparece en el panel del visor, no en una ventana aparte.
 `view_cad.py` es una herramienta de taller: **no** es dependencia de `ml/`, no entra en
 el build ni en CI. Si algún día falta, se reinstala con `pip install ocp-vscode`.
 
+### STL con doble clic
+
+La extensión **3D Viewer** (`slevesque.vscode-3dviewer`) registra un visor de mallas
+para `*.stl` (y `.obj`, `.ply`, `.3ds`, `.dae`, `.fbx`). Con ella, hacer doble clic en
+`MESAREDONDAV1.stl`, `Soportegrande.stl` o `soportesensorballuffV6.stl` abre la malla en
+una pestaña, sin panel ni comandos. Para volver a verlo como binario: clic derecho →
+`Open With...` → `Text Editor`.
+
+`Soporte2.stp` **no** lo cubre: STEP no es una malla. Ese archivo se ve con la vía OCP
+de arriba.
+
 ### Alternativas sin instalar nada
 
 - STEP y STL: <https://viewer.autodesk.com> (arrastrar y soltar).
