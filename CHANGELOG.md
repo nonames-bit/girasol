@@ -23,8 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `hardware/cad/view_cad.py`: local viewer that loads STEP and STL through the OCP
   kernel and renders them in the VS Code OCP CAD Viewer panel.
 - `hardware/cad/aligerar_soporte2.py` and `Soporte2_v2_ligero.stp` / `.stl`: parametric
-  lightened variant of the sensor support, 169,31 → 130,85 cm³ (−22,7 %), with the top
-  slot, mounting ends, strut feet and fillets verified as unchanged.
+  lightened variant of the sensor support, 169,31 → 140,27 cm³ (−17,2 %), with the top
+  slot, mounting ends, strut feet and fillets verified as unchanged. Section stiffness is
+  documented (strong-axis bending keeps 93 %, weak axis −47 % to −55 %); no FEA was run.
 
 ### Fixed
 

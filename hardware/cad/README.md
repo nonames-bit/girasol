@@ -28,7 +28,7 @@ este es un prototipo. **`PENDIENTE`**.
 | Archivo | Volumen | Δ | Qué cambia |
 | --- | --- | --- | --- |
 | `Soporte2.stp` | 169,31 cm³ | — | original del usuario |
-| `Soporte2_v2_ligero.stp` / `.stl` | 130,85 cm³ | −22,7 % | vanos oblongos en poste y patas, y ventanas en las dos zonas libres de la base |
+| `Soporte2_v2_ligero.stp` / `.stl` | 140,27 cm³ | −17,2 % | vanos oblongos en poste y patas, y ventanas en las dos zonas libres de la base |
 
 Se genera con **`aligerar_soporte2.py`**, que es la fuente paramétrica: las medidas de
 los cortes están en constantes al principio del archivo, así que la pieza se puede
@@ -38,14 +38,30 @@ Cortes aplicados y muros que dejan:
 
 | Zona | Corte | Muro resultante |
 | --- | --- | --- |
-| Poste (y 10..46) | vano oblongo 20 × 36 mm pasante en Z | montantes de ~11 mm; puentes de 10 mm abajo y 5 mm arriba |
-| Patas | vano oblongo 11 × 36 mm alineado con el eje | ~4,6 mm a cada lado |
+| Poste (y 10..46) | vano oblongo 16 × 36 mm pasante en Z | montantes de ~13 mm; puentes de 10 mm abajo y 5 mm arriba |
+| Patas | vano oblongo 7 × 30 mm alineado con el eje | ~6,6 mm a cada lado |
 | Base (2 ventanas) | R10, 41 × 41 y 36 × 41 mm | 5 mm contra contorno, poste y pie de pata |
 
-Verificado comparando el original y la variante bloque a bloque: **idénticos** la ranura
-superior y el travesaño, las puntas con sus agujeros de montaje, los pies de las patas,
-la franja central bajo el poste y los redondeos. El resultado es un solo sólido válido
-(`BRepCheck_Analyzer`).
+Zonas verificadas como **idénticas** al original, bloque a bloque: ranura superior y
+travesaño, puntas con sus agujeros de montaje, pies de las patas, franja central bajo el
+poste y redondeos. El resultado es un solo sólido válido (`BRepCheck_Analyzer`).
+
+### Qué cuesta en rigidez
+
+Medido por integración de la sección en y = 30 (momentos principales, cm⁴):
+
+| Elemento | Área | Imax | Imin |
+| --- | --- | --- | --- |
+| Poste original | 843 mm² | 10,56 | 3,09 |
+| Poste aligerado | 492 mm² (−42 %) | 9,83 (−7 %) | 1,65 (−47 %) |
+| Pata original | 468 mm² | 2,13 | 1,43 |
+| Pata aligerada | 266 mm² (−43 %) | 1,98 (−7 %) | 0,65 (−55 %) |
+
+Un vano pasante quita material en todo el canto, así que **Imin** (el que gobierna el
+pandeo de un miembro comprimido) cae casi como el área. La flexión en el eje fuerte se
+conserva al 93 %. No hay cálculo por elementos finitos: esto son propiedades de sección,
+no tensiones. Si la pieza trabaja a compresión fuerte, reducir o quitar los vanos de las
+patas.
 
 ## Cómo ver los CAD
 

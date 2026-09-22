@@ -1,8 +1,8 @@
 """Aligerado paramétrico de `Soporte2.stp` (Girasol).
 
-Genera una copia con menos material conservando la rigidez y, sobre todo, sin
-tocar la **ranura superior**, las puntas con sus agujeros de montaje, los pies de
-las patas ni los redondeos.
+Genera una copia con menos material cuidando la rigidez de sección y, sobre todo,
+sin tocar la **ranura superior**, las puntas con sus agujeros de montaje, los pies
+de las patas ni los redondeos. Lee la advertencia al final antes de fabricarla.
 
 Criterio de diseño
 ------------------
@@ -20,20 +20,33 @@ La pieza se midió con el kernel OCP antes de decidir dónde cortar:
 Solo se rebaja material en esas zonas libres, dejando muros de al menos 4,5 mm y
 radios grandes para no concentrar tensiones:
 
-1. **Poste**: vano oblongo pasante en Z, 20 mm de ancho × 36 mm de alto (y 10..46).
-   Deja dos montantes laterales de ~11 mm y puentes de 10 mm abajo y 5 mm arriba.
+1. **Poste**: vano oblongo pasante en Z, 16 mm de ancho × 36 mm de alto (y 10..46).
+   Deja dos montantes laterales de ~13 mm y puentes de 10 mm abajo y 5 mm arriba.
    El poste pasa de macizo a marco.
-2. **Patas**: un vano oblongo por pata, alineado con su eje, 11 mm × 36 mm,
-   centrado en el tramo recto. Deja ~4,6 mm de muro a cada lado.
+2. **Patas**: un vano oblongo por pata, alineado con su eje, 7 mm × 30 mm,
+   centrado en el tramo recto. Deja ~6,6 mm de muro a cada lado.
 3. **Base**: una ventana pasante de esquinas redondeadas (R10) en cada zona libre,
    41 × 41 mm y 36 × 41 mm, con 5 mm de borde contra el contorno, el poste y el
    pie de la pata.
 
-Resultado medido (verificado con la sección a distintas alturas):
+Resultado medido:
 
-- Volumen: 169,31 → **130,85 cm³** (−38,46 cm³, −22,7 %).
-- Reparto: poste −13,23 cm³, patas −15,55 cm³, base −8,96 cm³.
-- Zonas críticas comparadas una a una contra el original: **idénticas**.
+- Volumen: 169,31 → **140,27 cm³** (−29,04 cm³, −17,2 %).
+- Reparto: poste −10,83 cm³, patas −8,62 cm³, base −8,96 cm³.
+- Zonas críticas comparadas bloque a bloque contra el original: **idénticas**.
+- Rigidez de sección en y = 30 (momentos principales, integrados sobre una
+  rejilla de 0,2 mm):
+  poste Imax 10,56 → 9,83 cm⁴ (−7 %), Imin 3,09 → 1,65 cm⁴ (−47 %);
+  pata Imax 2,13 → 1,98 cm⁴ (−7 %), Imin 1,43 → 0,65 cm⁴ (−55 %).
+
+Advertencia honesta: **cualquier vano pasante quita material en todo el canto**,
+así que Imin —el momento que gobierna el pandeo de un miembro comprimido— baja
+casi en la misma proporción que el área. El aligerado conserva muy bien la
+flexión en el eje fuerte (−7 %) pero no sale gratis en el eje débil. Si la pieza
+trabaja a compresión fuerte, reducir o eliminar los vanos de las patas.
+
+Esto son propiedades de sección, no un análisis de tensiones: no se hizo cálculo
+por elementos finitos.
 
 Uso
 ---
@@ -68,17 +81,19 @@ TARGET_STL = CAD_DIR / "Soporte2_v2_ligero.stl"
 
 # --- Poste -----------------------------------------------------------------
 # Vano oblongo pasante en Z (la ranura va de z=0 a z=-22).
-# Los valores son los CENTROS de los radios; con R=10 el vano ocupa y 10..46.
-POSTE_X_MIN = -31.0  # extremo izquierdo del vano
-POSTE_X_MAX = -11.0  # extremo derecho del vano
-POSTE_Y_MIN = 20.0  # centro del radio inferior  -> borde inferior en y=10
-POSTE_Y_MAX = 36.0  # centro del radio superior  -> borde superior en y=46
+# Los valores son los CENTROS de los radios; con R=8 el vano ocupa y 10..46.
+POSTE_X_MIN = -29.0  # extremo izquierdo del vano
+POSTE_X_MAX = -13.0  # extremo derecho del vano
+POSTE_Y_MIN = 18.0  # centro del radio inferior  -> borde inferior en y=10
+POSTE_Y_MAX = 38.0  # centro del radio superior  -> borde superior en y=46
 POSTE_RADIO = (POSTE_X_MAX - POSTE_X_MIN) / 2.0
 
 # --- Patas -----------------------------------------------------------------
-# Vano oblongo alineado con el eje de cada pata.
-PATA_LARGO = 36.0
-PATA_ANCHO = 11.0
+# Vano oblongo alineado con el eje de cada pata. El ancho se mantiene por debajo
+# de un tercio del ancho de la pata para no desplomar el momento de inercia
+# minimo, que es el que gobierna el pandeo de un miembro comprimido.
+PATA_LARGO = 30.0
+PATA_ANCHO = 7.0
 PATA_CENTROS = (
     (-79.20, 30.0, 49.1),  # pata izquierda: x, y, ángulo del eje en grados
     (37.10, 30.0, 130.9),  # pata derecha
