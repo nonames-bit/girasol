@@ -23,6 +23,30 @@ y número de caras. La finalidad es la deducible del nombre y está **por confir
 y `MESAREDONDAV1.stl` mide Ø230 mm. Confirmar si el plato definitivo es de 310 mm o si
 este es un prototipo. **`PENDIENTE`**.
 
+## Variantes aligeradas
+
+| Archivo | Volumen | Δ | Qué cambia |
+| --- | --- | --- | --- |
+| `Soporte2.stp` | 169,31 cm³ | — | original del usuario |
+| `Soporte2_v2_ligero.stp` / `.stl` | 130,85 cm³ | −22,7 % | vanos oblongos en poste y patas, y ventanas en las dos zonas libres de la base |
+
+Se genera con **`aligerar_soporte2.py`**, que es la fuente paramétrica: las medidas de
+los cortes están en constantes al principio del archivo, así que la pieza se puede
+ajustar y regenerar sin tocar el CAD original.
+
+Cortes aplicados y muros que dejan:
+
+| Zona | Corte | Muro resultante |
+| --- | --- | --- |
+| Poste (y 10..46) | vano oblongo 20 × 36 mm pasante en Z | montantes de ~11 mm; puentes de 10 mm abajo y 5 mm arriba |
+| Patas | vano oblongo 11 × 36 mm alineado con el eje | ~4,6 mm a cada lado |
+| Base (2 ventanas) | R10, 41 × 41 y 36 × 41 mm | 5 mm contra contorno, poste y pie de pata |
+
+Verificado comparando el original y la variante bloque a bloque: **idénticos** la ranura
+superior y el travesaño, las puntas con sus agujeros de montaje, los pies de las patas,
+la franja central bajo el poste y los redondeos. El resultado es un solo sólido válido
+(`BRepCheck_Analyzer`).
+
 ## Cómo ver los CAD
 
 Vía recomendada, todo dentro de VS Code:
