@@ -27,7 +27,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   slot, mounting ends, strut feet and fillets verified as unchanged. Section stiffness is
   documented (strong-axis bending keeps 93 %, weak axis −47 % to −55 %); no FEA was run.
 
+- `raster.merge_arms` (§5.2) and the polar moments in `features.py`: area weights
+  `w_j = r_j` (§5.3), raw moments `M00, M10, M01`, and second- and third-order central
+  moments (§5.4). Empty rasters raise `ValueError` instead of dividing by `M00 = 0`.
+- `ml/tests/test_moments.py`: 20 hand-derived golden cases for the arm merge and the
+  moments, written before the implementation and checked at the agreed `1e-4` tolerance.
+
 ### Fixed
+
+- The CI gates were red on `main`: coverage on `girasol.features` was 71 % (now 93 %)
+  and `mypy --strict` rejected a redundant `cast` in `config.py`.
 
 - `parity.yml` no longer reports success without comparing: its readiness condition now
   matches the test's skip condition (Python **and** ST golden vectors), and the job runs

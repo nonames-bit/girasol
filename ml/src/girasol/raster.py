@@ -19,6 +19,9 @@ CHANNEL_RADII_MM: tuple[float, ...] = _CONFIG.radii_mm
 N_SCANS: int = _CONFIG.n_scans
 M_CHANNELS: int = _CONFIG.m_channels
 
+# Desfase del brazo B, en barridos: N/2 (§5.2).
+ARM_OFFSET_SCANS: int = _CONFIG.arm_offset_scans
+
 Raster = NDArray[np.bool_]
 
 
@@ -56,10 +59,23 @@ def merge_arms(raster_raw: Raster) -> Raster:
     Returns
     -------
     Raster
-        Raster fusionado de igual forma.
+        Raster fusionado de igual forma. La entrada no se modifica.
+
+    Raises
+    ------
+    ValueError
+        Si la forma no es ``(N_SCANS, M_CHANNELS)``.
 
     Notes
     -----
     Ver ``docs/02-matematicas.md`` §5.2. Con ``N = 100`` el desfase es 50 filas.
     """
-    raise NotImplementedError("Fase 2: implementar la fusión de brazos (§5.2).")
+    if raster_raw.shape != (N_SCANS, M_CHANNELS):
+        raise ValueError(
+            f"El raster crudo tiene forma {raster_raw.shape}; se esperaba "
+            f"({N_SCANS}, {M_CHANNELS})."
+        )
+    merged = raster_raw.astype(np.bool_, copy=True)
+    # B[k][j] = B_raw[(k + N/2) mod N][j] para j impar: np.roll con -N/2 lo hace.
+    merged[:, 1::2] = np.roll(raster_raw[:, 1::2], -ARM_OFFSET_SCANS, axis=0)
+    return merged
