@@ -86,8 +86,7 @@ def _radius_list(section: dict[str, Any]) -> tuple[float, ...]:
     radii = section.get("radii_mm")
     if not isinstance(radii, list) or not radii:
         raise ValueError("El parámetro 'raster.radii_mm' debe ser una lista no vacía.")
-    values = cast("list[Any]", radii)
-    return tuple(_as_float(item, "raster.radii_mm") for item in values)
+    return tuple(_as_float(item, "raster.radii_mm") for item in radii)
 
 
 def load_config(path: Path | None = None) -> GirasolConfig:
